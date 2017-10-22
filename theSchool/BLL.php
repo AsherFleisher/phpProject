@@ -48,6 +48,15 @@ session_start();
             {
                 require_once "administration.php";
             }
+
+            function course($courseName)
+            {
+               $_SESSION["courseName"] = $courseName;
+               require_once "course.php";
+            }
+
+
+
    }
 
  

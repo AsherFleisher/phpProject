@@ -37,6 +37,11 @@ require_once "BLL.php";
         $a = new schoolBLL;
         $a->administration();
         break;
+
+        case "course":
+        $a = new schoolBLL;
+        $a->course($_POST["courseName"]);
+        break;
         
     }
 ?>

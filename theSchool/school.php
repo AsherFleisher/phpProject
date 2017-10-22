@@ -11,10 +11,8 @@
             $statement = $pdo->query("SELECT * FROM course");
            
             foreach ($statement as $row)
-            {    
-                    
-                     echo  "<button onclick='ajax(this)'>" . $row['name'] . "</button><br/>";
-
+            {          
+                    echo  "<button name='course' onclick='ajax(this)'>" . $row['name'] . "</button><br/>";
             }  
             ?>
                  <div id="ajax"></div>
