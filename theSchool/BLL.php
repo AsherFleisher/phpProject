@@ -24,7 +24,8 @@ session_start();
                 {
                      if($row['name'] === $username && $row['password'] === $password)
                     {
-                          require_once  "main.php";
+                          header("Location: main.php");
+                          die();
                     }
                 }           
         }
@@ -39,6 +40,7 @@ session_start();
 
           function school()
             {
+             
                 require_once "school.php";
             }
 

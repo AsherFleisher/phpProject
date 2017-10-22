@@ -6,7 +6,17 @@
             </head>
 
             <body>
-           hi
+              <?php
+            require "DAL.php";
+            $statement = $pdo->query("SELECT * FROM course");
+           
+            foreach ($statement as $row)
+            {    
+                    
+                     echo  "<button onclick='ajax(this)'>" . $row['name'] . "</button><br/>";
+
+            }  
+            ?>
             
             </body>
     </html>
