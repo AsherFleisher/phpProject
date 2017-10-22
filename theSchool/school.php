@@ -17,6 +17,8 @@
 
             }  
             ?>
+                 <div id="ajax"></div>
+            <script src="ajax.js"></script>
             
             </body>
     </html>
