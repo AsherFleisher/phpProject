@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* CSS Document */
+
+.introdiv {
+	position: absolute;
+	top: 30px;
+	display: table-row;
+}
+
+.press_l {
+	display: table;
+	vertical-align: top;
+	top: 0px;
+	left: 0px;
+	width: 366px;
+	height: 647px;
+	text-align: right;
+	padding-right: 5px;
+	}
+
+.press_left {
+	display: table-cell;
+	vertical-align: top;
+	width: 366px;
+	text-align: right;
+	}
+
+.press {
+	position: absolute;
+	top: 35px;
+	left: 369px;
+	width: 537px;
+	text-align: center;
+	}
+
+.press_r {
+	display: table;
+	vertical-align: top;
+	position: absolute;
+	top: 0px;
+	left: 908px;
+	width: 371px;
+	text-align: left;
+	}
+
+.press_right {
+	display: table-cell;
+	vertical-align: top;
+	width: 371px;
+	text-align:left;
+}
