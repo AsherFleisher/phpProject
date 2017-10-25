@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
     <html>
@@ -7,15 +8,18 @@
 
             <body>
               <?php
-            require "DAL.php";
-            $statement = $pdo->query("SELECT * FROM course");
+            require "course.php";
+            require "students.php";
+
+         $course = new course;
+         $course->allCourse();
+
+         $students = new students;
+         $students->allStudents();
            
-            foreach ($statement as $row)
-            {          
-                    echo  "<button name='course' onclick='ajax(this)'>" . $row['name'] . "</button><br/>";
-            }  
+            
             ?>
-                 <div id="ajax"></div>
+                 <div id="ajax2"></div>
             <script src="ajax.js"></script>
             
             </body>

@@ -4,30 +4,19 @@ session_start();
    {
         function login($username,$password)
         {
-            require "DAL.php";
-
-            
+            require "DAL.php";           
             $statement = $pdo->query("SELECT * FROM admin");
-            $stm = $pdo->query("SELECT * FROM students");
+            
             foreach ($statement as $row)
             {    
                     if($row['name'] === $username && $row['password'] === $password)
                     {
                        $_SESSION["role"] =  $row['role'];
                        header("Location: main.php");
-                       die();
-                      
-                    }
-            }     
-
-                foreach ($stm as $row2)
-                {
-                     if($row['name'] === $username && $row['password'] === $password)
-                    {
-                          header("Location: main.php");
-                          die();
-                    }
-                }           
+                       die();                     
+                    }                
+            }
+            echo "username or pass not valid";                          
         }
 
         function logout()
@@ -53,10 +42,43 @@ session_start();
             {
                $_SESSION["courseName"] = $courseName;
                require_once "course.php";
+               $course = new course;
+               $course->chooseCourse();
             }
 
+            function student($student)
+            {
+               $_SESSION["students"] = $student;
+               require_once "students.php";
+               $students = new students;
+               $students->chooseStudent();
+            }
 
+            function students()
+            {
+               require_once "students.php";
+               $students = new students;
+               $students->allStudents();
+            }
 
+            function create($studentId,$studentName,$studentEmail,$studentPhone)
+            {
+                require "DAL.php";
+    
+                    $statement = $pdo->prepare("INSERT INTO students(Id,name,phone,email)
+                    VALUES( :Id,:name,:phone,:email)");
+                    $statement->execute(array(
+                    ":Id" => $studentId,
+                    ":name" => $studentName,
+                    ":phone" => $studentPhone,
+                    ":email" => $studentEmail
+                    ));
+    
+                    echo  $studentName . " has been created <br/>";
+                }
+                
+            
+            
    }
 
  
