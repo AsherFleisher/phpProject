@@ -8,7 +8,7 @@
                       
                        foreach ($statement as $row)
                        {          if($row['name'] ===  $students)
-                               echo   $row['name'] . $row['email'] . $row['phone'] . "<br/>";
+                               echo   "Name: " . $row['name'] . "<br/>Email: " . $row['email'] . "<br/>Phone: " . $row['phone'] . "<br/><button name='editStudent' data-studentName='{$row['name']}' onclick='ajax(this)' > Edit student</button><br/>";
                        }  
               }
 

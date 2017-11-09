@@ -17,7 +17,7 @@ session_start();
              if( $_SESSION["role"] === "owner"  || $_SESSION["role"] === "manager")
             {echo "<button name='administration' onclick='ajax(this)'>Administration</button>";}  
              ?>
-            <?php echo $_SESSION['username'] . "  " . $_SESSION["role"] ?>
+            <?php echo $_SESSION["username"] . "  " . $_SESSION["role"] ?>
             <form action="API.php" method="post">
                 <button name="action" value="logout">logout</button>
             </form>  

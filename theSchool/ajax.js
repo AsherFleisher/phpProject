@@ -12,6 +12,8 @@ function ajax(a) {
         var studentPhone = document.getElementById("studentPhone").value
     if (document.getElementById("studentId") !== null)
         var studentId = document.getElementById("studentId").value
+    if (a.getAttribute('data-studentName') != undefined)
+        var studentName = a.getAttribute('data-studentName')
     var action = a.getAttribute('name')
     if (action === "course") {
         var courseName = a.innerHTML

@@ -2,33 +2,33 @@
 require_once "BLL.php";
 
     $action = $_POST["action"];
-    if(isset( $_POST["password"]))
+    if(isset( $_POST["password"]) && $_POST["password"] !== "undefined")
     {
         $password = $_POST["password"];
         $_SESSION["password"] = $password;
     }
     
-    if(isset( $_POST["username"]))
+    if(isset( $_POST["username"]) && $_POST["username"] !== "undefined" )
     {
        $username = $_POST["username"];
        $_SESSION["username"] = $username;
     }
-    if(isset( $_POST["studentName"]))
+    if(isset( $_POST["studentName"]) && $_POST["studentName"] !== "undefined")
     {
        $studentName = $_POST["studentName"];
        $_SESSION["studentName"] = $studentName;
     }
-    if(isset( $_POST["studentPhone"]))
+    if(isset( $_POST["studentPhone"]) && $_POST["studentPhone"] !== "undefined")
     {
        $studentPhone = $_POST["studentPhone"];
        $_SESSION["studentPhone"] = $studentPhone;
     }
-    if(isset( $_POST["studentEmail"]))
+    if(isset( $_POST["studentEmail"]) && $_POST["studentEmail"]  !== "undefined")
     {
        $studentEmail = $_POST["studentEmail"];
        $_SESSION["studentEmail"] = $studentEmail;
     }
-    if(isset( $_POST["studentId"]))
+    if(isset( $_POST["studentId"]) && $_POST["studentId"] !== "undefined")
     {
        $studentId = $_POST["studentId"];
        $_SESSION["studentId"] = $studentId;
@@ -73,10 +73,18 @@ require_once "BLL.php";
         break;
         
         case "create":
-
         $a = new schoolBLL;
         $a->create($_SESSION["studentId"],$_SESSION["studentName"],$_SESSION["studentEmail"],$_SESSION["studentPhone"]);
         break;
         
+        case "editStudent":
+        $a = new schoolBLL;
+        $a->editStudent($_SESSION["studentName"]);
+        break;
+
+        case "updateStudent":
+        $a = new schoolBLL;
+        $a->updateStudent($_SESSION["studentId"],$_SESSION["studentName"],$_SESSION["studentEmail"],$_SESSION["studentPhone"]);
+        break;
     }
 ?>
