@@ -4,9 +4,9 @@ session_start();
    {
         function login($username,$password)
         {
-            require "adminClass";
+            require_once "adminClass.php";
             $admin = new admin;
-            $admin->admin();               
+            $admin->admin($username,$password);               
         }
 
         function logout()

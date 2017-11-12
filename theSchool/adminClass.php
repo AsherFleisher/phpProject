@@ -1,7 +1,11 @@
 <?php
 class admin
 {
-    function admin(){
+    function __construct()
+    {
+        
+    }    
+    function admin($username,$password){
 
     require "DAL.php";           
     $statement = $pdo->query("SELECT * FROM admin");
@@ -16,6 +20,6 @@ class admin
             }                
     }
     echo "username or pass not valid";
-}
+  }
 }
 ?>
