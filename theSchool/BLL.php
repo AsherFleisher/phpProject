@@ -51,28 +51,66 @@ session_start();
                $students->allStudents();
             }
 
+            function staffs()
+            {
+                require_once "staff.php";
+                $staff = new staff;
+                $staff->allStaff();
+            }
+
+            function staff($student)
+            {
+               $_SESSION["students"] = $student;
+               require "staff.php";
+               $staff = new staff;
+               $staff->chooseStaff();
+            }
+
             function create($studentId,$studentName,$studentEmail,$studentPhone)
             { 
                 require "students.php";
                 $students = new students;
                 $students->insertStudent($studentId,$studentName,$studentEmail,$studentPhone);     
             }
+
+            function createStaff($studentId,$studentName,$studentEmail,$studentPhone,$password,$role)
+            { 
+                require "staff.php";
+                $staff = new staff;
+                $staff->insertStaff($studentId,$studentName,$studentEmail,$studentPhone,$password,$role);     
+            }
                 
-                function editStudent($studentName)
+                function editStudent($studentName,$studentId)
                 {
-                    $_SESSION["studentChange"]=$studentName;
+                    $_SESSION["studentChange"]=$studentId;
                     require "students.php";
                     $students = new students;
-                    $students->editStudent($studentName);   
+                    $students->editStudent($studentName,$studentId);   
                 }
                 
                 function updateStudent($studentId,$studentName,$studentEmail,$studentPhone)
                 {                   
                     require "students.php";
                     $students = new students;
-                    $students->editStudent($studentId,$studentName,$studentEmail,$studentPhone);      
+                    $students->updateStudent($studentId,$studentName,$studentEmail,$studentPhone);      
                            
-                }     
+                }
+                
+                function editStaff($studentName,$studentId)
+                {
+                    $_SESSION["studentChange"]=$studentId;
+                    require "staff.php";
+                    $staff = new staff;
+                    $staff->editStaff($studentName,$studentId);   
+                }
+
+                function updateStaff($studentId,$studentName,$studentEmail,$studentPhone,$role)
+                {                   
+                    require "staff.php";
+                    $staff = new staff;
+                    $staff->updateStaff($studentId,$studentName,$studentEmail,$studentPhone,$role);      
+                           
+                }
    }
 
 ?>

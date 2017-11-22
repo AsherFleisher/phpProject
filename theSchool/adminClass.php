@@ -14,7 +14,7 @@ class admin
     {    
             if($row['name'] === $username && $row['password'] === $password)
             {
-               $_SESSION["role"] =  $row['role'];
+               $_SESSION["role2"] =  $row['role'];
                header("Location: main.php");
                die();                     
             }                

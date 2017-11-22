@@ -14,15 +14,33 @@ function ajax(a) {
         var studentId = document.getElementById("studentId").value
     if (a.getAttribute('data-studentName') != undefined)
         var studentName = a.getAttribute('data-studentName')
+    if (a.getAttribute('data-studentId') != undefined)
+        var studentId = a.getAttribute('data-studentId')
+    if (document.getElementById("role") !== null) {
+        var role1 = document.getElementById("role")
+        var role = role1.options[role1.selectedIndex].value;
+    }
+
     var action = a.getAttribute('name')
+    if (action === "logout") {
+        document.location.href = "index.html";
+    }
     if (action === "course") {
         var courseName = a.innerHTML
         ajax = "ajax2"
     }
-    if (action === "student" || action === "students") {
+    if (action === "student" || action === "students" || action === "staff") {
         var student = a.innerHTML
         ajax = "ajax2"
     }
+    if (action === "addStudent" || action === "addStaff") {
+        ajax = "addStudent"
+    }
+    var allAjax = document.getElementsByClassName("allAjax")
+    for (i = 0; i < allAjax.length; i++) {
+        allAjax[i].innerHTML = ""
+    }
+
 
 
     var data = new FormData()
@@ -35,8 +53,7 @@ function ajax(a) {
     data.append("studentPhone", studentPhone);
     data.append("studentEmail", studentEmail);
     data.append("studentId", studentId);
-
-
+    data.append("role", role);
 
 
     var xhttp = new XMLHttpRequest();
