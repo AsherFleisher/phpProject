@@ -7,8 +7,13 @@
                                 $statement = $pdo->query("SELECT * FROM students");
                                 
                                 foreach ($statement as $row)
-                                {          if($row['name'] ===  $students)
-                                        echo   "Name: " . $row['name'] . "<br/>Email: " . $row['email'] . "<br/>Phone: " . $row['phone'] . "<br/><button name='editStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Edit student</button><br/><button name='deleteStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Delete student</button><br/>";
+                                {       
+                                        
+                                        if($row['name'] ===  $students)
+                                        {
+                                              $_SESSION["courses"] = $row["courseId"];
+                                               echo   "Name: " . $row['name'] . "<br/>Email: " . $row['email'] . "<br/>Phone: " . $row['phone'] . "<br/><button name='editStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Edit student</button><br/><button name='deleteStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Delete student</button><br/>"; 
+                                        }
                                 }  
                         }
 
@@ -133,7 +138,7 @@
                                 
                         
 
-                        function editStudent($studentName,$studentId)
+                        function editStudent($studentName,$studentId,$courses)
                         {
                                 $_SESSION["studentChange"]=$studentId;
                                 echo  "<p>Update {$studentName} , Id: $studentId: </p> 
@@ -142,6 +147,9 @@
                                 <p>Change student phone to: <input type='number' id='studentPhone'></p>
                                 <p>Change student email to: <input id='studentEmail'></p>
                                 <button name='updateStudent' onclick='ajax(this)'>Change </button>";
+                                 $a = new students;
+                                 $a->showCourses($courses);
+                                
                         }
 
                         function addStudent()
@@ -163,5 +171,25 @@
 
                                 
                         }
-                     }  
+
+                        function showCourses($courses)
+                        {
+                                require "DAL.php";
+                                $courses = explode(",",$courses);
+                                $statement = $pdo->query("SELECT * FROM course");
+                                
+                                foreach ($statement as $row)
+                                {     
+                                        for($i = 0; $i < count($courses); $i++)
+                                        {
+                                                if($courses[$i] == $row["id"])
+                                                {
+                                                        echo $row["name"];
+                                                }
+                                        }
+                                }          
+                        }
+                     
+                     
+        }  
 ?>

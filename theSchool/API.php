@@ -79,7 +79,7 @@ require_once "BLL.php";
         
         case "editStudent":
         $a = new schoolBLL;
-        $a->editStudent($_SESSION["studentName"],$_SESSION["studentId"]);
+        $a->editStudent($_SESSION["studentName"],$_SESSION["studentId"],$_SESSION["courses"] );
         break;
 
         case "updateStudent":
