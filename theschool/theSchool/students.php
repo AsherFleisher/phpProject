@@ -8,7 +8,7 @@
                                 
                                 foreach ($statement as $row)
                                 {          if($row['name'] ===  $students)
-                                        echo   "Name: " . $row['name'] . "<br/>Email: " . $row['email'] . "<br/>Phone: " . $row['phone'] . "<br/><button name='editStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Edit student</button><br/>";
+                                        echo   "Name: " . $row['name'] . "<br/>Email: " . $row['email'] . "<br/>Phone: " . $row['phone'] . "<br/><button name='editStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Edit student</button><br/><button name='deleteStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Delete student</button><br/>";
                                 }  
                         }
 
@@ -126,6 +126,7 @@
                                                 else{echo "you didnt enter any information for change";}
                                                                
                                         }
+                                        echo "your Changes where saved";
                                         $a = new students;
                                         $a->allStudents();
                                 }
@@ -136,10 +137,10 @@
                         {
                                 $_SESSION["studentChange"]=$studentId;
                                 echo  "<p>Update {$studentName} , Id: $studentId: </p> 
-                                Change student Id to: <input type='number' id='studentId'>
-                                Change student name to: <input id='studentName'>
-                                Change student phone to: <input type='number' id='studentPhone'>
-                                Change student email to: <input id='studentEmail'>
+                                <p>Change student Id to: <input type='number' id='studentId'></p>
+                                <p>Change student name to: <input id='studentName'></p>
+                                <p>Change student phone to: <input type='number' id='studentPhone'></p>
+                                <p>Change student email to: <input id='studentEmail'></p>
                                 <button name='updateStudent' onclick='ajax(this)'>Change </button>";
                         }
 
@@ -150,6 +151,17 @@
                                 <p>Insert student phone <input type='number' id='studentPhone'></p>
                                 <p>Insert student email <input type='email' id='studentEmail'></p>
                                 <button name='create' onclick='ajax(this)'>Create new student</button>";
+                        }
+
+                        function deleteStudent($studentName,$studentId)
+                        {
+                                require "DAL.php";
+                                $statement = $pdo->query("DELETE FROM students WHERE id = {$studentId} ");
+                                echo "{$studentName} Was deleted!";
+                                $a = new students;
+                                $a->allStudents();
+
+                                
                         }
                      }  
 ?>

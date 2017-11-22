@@ -95,6 +95,14 @@ session_start();
                     $students->updateStudent($studentId,$studentName,$studentEmail,$studentPhone);      
                            
                 }
+
+                function deleteStudent($studentName,$studentId)
+                {
+                    $_SESSION["studentChange"]=$studentId;
+                    require "students.php";
+                    $students = new students;
+                    $students->deleteStudent($studentName,$studentId);   
+                }
                 
                 function editStaff($studentName,$studentId)
                 {
@@ -110,6 +118,14 @@ session_start();
                     $staff = new staff;
                     $staff->updateStaff($studentId,$studentName,$studentEmail,$studentPhone,$role);      
                            
+                }
+
+                function deleteStaff($studentName,$studentId)
+                {
+                    $_SESSION["studentChange"]=$studentId;
+                    require "staff.php";
+                    $staff = new staff;
+                    $staff->deleteStaff($studentName,$studentId);   
                 }
    }
 

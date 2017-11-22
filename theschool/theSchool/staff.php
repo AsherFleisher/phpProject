@@ -24,7 +24,7 @@
                             
                             foreach ($statement as $row)
                             {          if($row['name'] ===  $students)
-                                    echo   "Name: " . $row['name'] . "<br/>Email: " . $row['email'] . "<br/>Phone: " . $row['phone'] ."<br/>Role: " . $row['role'] . "<br/><button name='editStaff' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Edit staff</button><br/>";
+                                    echo   "Name: " . $row['name'] . "<br/>Email: " . $row['email'] . "<br/>Phone: " . $row['phone'] ."<br/>Role: " . $row['role'] . "<br/><button name='editStaff' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Edit staff</button><br/><button name='deleteStaff' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Delete staff</button><br/>";
                             }  
                     }
 
@@ -89,11 +89,11 @@
                     {
                             $_SESSION["studentChange"]=$studentId;
                             echo  "<p>Update {$studentName} , Id: $studentId: </p> 
-                            Change Staff Id to: <input type='number' id='studentId'>
-                            Change Staff name to: <input id='studentName'>
-                            Change Staff phone to: <input type='number' id='studentPhone'>
-                            Change Staff email to: <input id='studentEmail'>";
-                            if($_SESSION["role2"] === "owner")
+                            <p>Change Staff Id to: <input type='number' id='studentId'></p>
+                            <p>Change Staff name to: <input id='studentName'></p>
+                            <p>Change Staff phone to: <input type='number' id='studentPhone'></p>
+                            <p>Change Staff email to: <input id='studentEmail'></p>";
+                            if($_SESSION["role2"] === "owner" && $studentId != 1)
                             {
                                 echo "Change Staff role <select id='role'> 
                                 <option value='manager' >Manager</option>
@@ -180,6 +180,17 @@
                                     }
                                     $a = new staff;
                                     $a->allStaff();
+                            }
+
+                            function deleteStaff($studentName,$studentId)
+                            {
+                                    require "DAL.php";
+                                    $statement = $pdo->query("DELETE FROM admin WHERE id = {$studentId} ");
+                                    echo "{$studentName} Was deleted!";
+                                    $a = new staff;
+                                    $a->allStaff();
+    
+                                    
                             }
                             
 
