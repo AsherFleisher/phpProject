@@ -87,6 +87,11 @@ require_once "BLL.php";
         $a->updateStudent($_SESSION["studentId"],$_SESSION["studentName"],$_SESSION["studentEmail"],$_SESSION["studentPhone"]);
         break;
 
+        case "deleteStudent":
+        $a = new schoolBLL;
+        $a->deleteStudent($_SESSION["studentName"],$_SESSION["studentId"]);
+        break;
+
         case "staff":
         $a = new schoolBLL;
         $a->staff($_POST["student"]);
@@ -118,6 +123,11 @@ require_once "BLL.php";
         require "staff.php";
         $a = new staff;
         $a->addStaff();
+        break;
+
+        case "deleteStaff":
+        $a = new schoolBLL;
+        $a->deleteStaff($_SESSION["studentName"],$_SESSION["studentId"]);
         break;
     }
 ?>

@@ -1,5 +1,6 @@
 function ajax(a) {
     var ajax = "ajax"
+
     if (document.getElementById("username") !== null)
         var username = document.getElementById("username").value
     if (document.getElementById("password") !== null)
@@ -35,6 +36,9 @@ function ajax(a) {
     }
     if (action === "addStudent" || action === "addStaff") {
         ajax = "addStudent"
+    }
+    if (action === "deleteStudent" || action === "deleteStaff") {
+        if (confirm("Are you sure you would like to delete")) {} else { throw "Decided not to delete"; }
     }
     var allAjax = document.getElementsByClassName("allAjax")
     for (i = 0; i < allAjax.length; i++) {
