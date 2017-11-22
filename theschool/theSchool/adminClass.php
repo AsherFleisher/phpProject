@@ -1,7 +1,11 @@
 <?php
 class admin
 {
-    function admin(){
+    function __construct()
+    {
+        
+    }    
+    function admin($username,$password){
 
     require "DAL.php";           
     $statement = $pdo->query("SELECT * FROM admin");
@@ -10,12 +14,12 @@ class admin
     {    
             if($row['name'] === $username && $row['password'] === $password)
             {
-               $_SESSION["role"] =  $row['role'];
+               $_SESSION["role2"] =  $row['role'];
                header("Location: main.php");
                die();                     
             }                
     }
     echo "username or pass not valid";
-}
+  }
 }
 ?>

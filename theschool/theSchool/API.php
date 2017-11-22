@@ -79,12 +79,45 @@ require_once "BLL.php";
         
         case "editStudent":
         $a = new schoolBLL;
-        $a->editStudent($_SESSION["studentName"]);
+        $a->editStudent($_SESSION["studentName"],$_SESSION["studentId"]);
         break;
 
         case "updateStudent":
         $a = new schoolBLL;
         $a->updateStudent($_SESSION["studentId"],$_SESSION["studentName"],$_SESSION["studentEmail"],$_SESSION["studentPhone"]);
+        break;
+
+        case "staff":
+        $a = new schoolBLL;
+        $a->staff($_POST["student"]);
+        break;
+
+        case "createStaff":
+        $a = new schoolBLL;
+        $a->createStaff($_SESSION["studentId"],$_SESSION["studentName"],$_SESSION["studentEmail"],$_SESSION["studentPhone"],$_SESSION["password"],$_POST["role"]);
+        break;
+
+        case "editStaff":
+        $a = new schoolBLL;
+        $a->editStaff($_SESSION["studentName"],$_SESSION["studentId"]);
+        break;
+
+        
+        case "addStudent":
+        require "students.php";
+        $a = new students;
+        $a->addStudent();
+        break;
+
+        case "updateStaff":
+        $a = new schoolBLL;
+        $a->updateStaff($_SESSION["studentId"],$_SESSION["studentName"],$_SESSION["studentEmail"],$_SESSION["studentPhone"],$_POST["role"]);
+        break;
+           
+        case "addStaff":
+        require "staff.php";
+        $a = new staff;
+        $a->addStaff();
         break;
     }
 ?>

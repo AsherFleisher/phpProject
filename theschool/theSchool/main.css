@@ -1,0 +1,25 @@
+.studentDiv,
+.courseDiv,
+.staffDiv {
+    width: 10%;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    margin: 3%
+}
+
+.course {
+    flex: 1
+}
+
+.student {
+    flex: 1
+}
+
+.addStudent {
+    margin-bottom: 10px;
+}
+
+.addStaff {
+    float: left
+}
