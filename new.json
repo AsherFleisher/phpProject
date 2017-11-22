@@ -1,0 +1,3 @@
+[{"id":1, "name":"joe", "phone":565767, "email":"joe@gmail.com", "image":"", "courseId":"1,2,3"},
+ {"id":2, "name":"rob", "phone":12134, "email":"rob@gmail.com", "image":"", "courseId":"1,2"},
+ {"id":3, "name":"michael", "phone":55668, "email":"michael@gmail.com", "image":"", "courseId":"1"}]
