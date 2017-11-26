@@ -21,8 +21,11 @@ function ajax(a) {
         var role1 = document.getElementById("role")
         var role = role1.options[role1.selectedIndex].value;
     }
-    if (document.getElementsByClassName("chooseCourseDiv") !== null) {
-
+    if (document.getElementsByClassName("chooseCourseDiv")[0] !== undefined) {
+        var courseChecked = [];
+        $('.course:checked').each(function(i){
+          courseChecked[i] = $(this).val();
+        });
     }
 
     var action = a.getAttribute('name')
@@ -61,6 +64,7 @@ function ajax(a) {
     data.append("studentEmail", studentEmail);
     data.append("studentId", studentId);
     data.append("role", role);
+    data.append("courseChecked", courseChecked);
 
 
     var xhttp = new XMLHttpRequest();

@@ -39,6 +39,7 @@ class course{
                                         {
                                                 if($courses[$i] == $row["id"])
                                                 {
+                                                        $_SESSION["courseArray"] .= $row["id"] .",";
                                                         echo "<span class='courses'>" . $row["name"] . "</span>";
                                                 }
                                         }
@@ -47,17 +48,25 @@ class course{
                                           
                         }
 
-                        function updateCourses(){
+                        function pickCourses(){
                                 echo "<div class='chooseCourseDiv'><h4>  All Course</h4>";
                                 require "DAL.php";
-                                $statement = $pdo->query("SELECT * FROM course");
-                                
+                                $courseArray = explode( ",",$_SESSION["courseArray"]);
+                                $statement = $pdo->query("SELECT * FROM course");                           
                                 foreach ($statement as $row)
-                                {          
-                                        echo  "<input type='checkbox' class='course btn btn-outline-secondary' name='updateCourse' value={$row['name']}>" . $row['name'] . "</input><br/>";
+                                { 
+                                        $checked =null;  
+                                        for($i =0; $i<count($courseArray); $i++)
+                                        {
+                                                 if($courseArray[$i] == $row["id"])
+                                                 {
+                                                        $checked ="checked";
+                                                 }    
+                                        }
+                                        echo  "<input type='checkbox' class='course btn btn-outline-secondary' name='updateCourse' value={$row['id']} $checked>" . $row['name'] . "</input><br/>";
+                                       
                                 } 
                                 echo "</div>";
-
                         }
 
 

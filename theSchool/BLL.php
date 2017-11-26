@@ -88,11 +88,11 @@ session_start();
                     $students->editStudent($studentName,$studentId,$courses);   
                 }
                 
-                function updateStudent($studentId,$studentName,$studentEmail,$studentPhone)
+                function updateStudent($studentId,$studentName,$studentEmail,$studentPhone,$courseChecked)
                 {                   
                     require "students.php";
                     $students = new students;
-                    $students->updateStudent($studentId,$studentName,$studentEmail,$studentPhone);      
+                    $students->updateStudent($studentId,$studentName,$studentEmail,$studentPhone,$courseChecked);      
                            
                 }
 
