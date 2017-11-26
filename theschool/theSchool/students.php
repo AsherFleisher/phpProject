@@ -7,13 +7,19 @@
                                 $statement = $pdo->query("SELECT * FROM students");
                                 
                                 foreach ($statement as $row)
-                                {          if($row['name'] ===  $students)
-                                        echo   "Name: " . $row['name'] . "<br/>Email: " . $row['email'] . "<br/>Phone: " . $row['phone'] . "<br/><button name='editStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Edit student</button><br/><button name='deleteStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Delete student</button><br/>";
+                                {       
+                                        
+                                        if($row['name'] ===  $students)
+                                        {
+                                              $_SESSION["courses"] = $row["courseId"];
+                                               echo   "Id: " . $row["id"] . "<br/>Name: " . $row['name'] . "<br/>Email: " . $row['email'] . "<br/>Phone: " . $row['phone'] . "<br/><br/><button name='editStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Edit student</button><br/><br/><button name='deleteStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Delete student</button><br/>"; 
+                                        }
                                 }  
                         }
 
                         function allStudents()
                         {
+                                unset($_SESSION["courseArray"]);
                                 echo "<div class='studentDiv'><h4>  All Students</h4><button name='addStudent' onclick='ajax(this)'>+</button><br/>";
                                 require "DAL.php";
                                 $statement2 = $pdo->query("SELECT * FROM students");
@@ -64,8 +70,9 @@
                                 $a->allStudents();
                         }
 
-                        function updateStudent($studentId,$studentName,$studentEmail,$studentPhone)
+                        function updateStudent($studentId,$studentName,$studentEmail,$studentPhone,$courseChecked)
                         {
+                                unset($_SESSION["courseArray"]);
                                 require "DAL.php";
                                 $statement = $pdo->query("SELECT * FROM students");
                                 $haveAlready = 0;
@@ -114,6 +121,17 @@
                                                         else{
                                                                 $stm = "phone = {$studentPhone}";
                                                         }
+                                                } 
+                                                if($courseChecked !== "")
+                                                {
+                                                       
+                                                        if($studentEmail !== "" || $studentId !== "" || $studentName !== "" || $studentPhone !== "" )
+                                                        {
+                                                        $stm .= ", courseId = '{$courseChecked}'";
+                                                        }
+                                                        else{
+                                                                $stm = "courseId = '{$courseChecked}'";
+                                                        }
                                                 }
                                                 
                                                 $ID =intval($_SESSION['studentChange']);
@@ -121,7 +139,8 @@
                                                 {
                                                         $stm2 = "UPDATE students SET $stm WHERE id = $ID ";
                                                         
-                                                        $statement = $pdo->query($stm2);   
+                                                        $statement = $pdo->query($stm2); 
+
                                                 }
                                                 else{echo "you didnt enter any information for change";}
                                                                
@@ -133,15 +152,23 @@
                                 
                         
 
-                        function editStudent($studentName,$studentId)
+                        function editStudent($studentName,$studentId,$courses)
                         {
+                                require_once "course.php"; 
+                                $c = new students;
+                                $c->chooseStudent();
+                                $b = new course;
+                                $b->showCourses($courses);
                                 $_SESSION["studentChange"]=$studentId;
                                 echo  "<p>Update {$studentName} , Id: $studentId: </p> 
                                 <p>Change student Id to: <input type='number' id='studentId'></p>
                                 <p>Change student name to: <input id='studentName'></p>
                                 <p>Change student phone to: <input type='number' id='studentPhone'></p>
-                                <p>Change student email to: <input id='studentEmail'></p>
-                                <button name='updateStudent' onclick='ajax(this)'>Change </button>";
+                                <p>Change student email to: <input id='studentEmail'></p>";
+                                $a = new course;
+                                $a->pickCourses($courses);
+                                echo "<button name='updateStudent' onclick='ajax(this)'>Change </button>";
+                                
                         }
 
                         function addStudent()
@@ -163,5 +190,7 @@
 
                                 
                         }
-                     }  
+                     
+                     
+        }  
 ?>

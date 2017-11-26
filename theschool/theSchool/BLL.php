@@ -80,19 +80,19 @@ session_start();
                 $staff->insertStaff($studentId,$studentName,$studentEmail,$studentPhone,$password,$role);     
             }
                 
-                function editStudent($studentName,$studentId)
+                function editStudent($studentName,$studentId,$courses)
                 {
                     $_SESSION["studentChange"]=$studentId;
                     require "students.php";
                     $students = new students;
-                    $students->editStudent($studentName,$studentId);   
+                    $students->editStudent($studentName,$studentId,$courses);   
                 }
                 
-                function updateStudent($studentId,$studentName,$studentEmail,$studentPhone)
+                function updateStudent($studentId,$studentName,$studentEmail,$studentPhone,$courseChecked)
                 {                   
                     require "students.php";
                     $students = new students;
-                    $students->updateStudent($studentId,$studentName,$studentEmail,$studentPhone);      
+                    $students->updateStudent($studentId,$studentName,$studentEmail,$studentPhone,$courseChecked);      
                            
                 }
 

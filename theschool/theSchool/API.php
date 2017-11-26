@@ -33,6 +33,11 @@ require_once "BLL.php";
        $studentId = $_POST["studentId"];
        $_SESSION["studentId"] = $studentId;
     }
+    if(isset( $_POST["courseChecked"]) && $_POST["courseChecked"] !== "undefined")
+    {
+        $courseChecked = $_POST["courseChecked"];
+        $_SESSION["courseChecked"] = $courseChecked;
+    }
     
     
     switch($action)
@@ -79,12 +84,12 @@ require_once "BLL.php";
         
         case "editStudent":
         $a = new schoolBLL;
-        $a->editStudent($_SESSION["studentName"],$_SESSION["studentId"]);
+        $a->editStudent($_SESSION["studentName"],$_SESSION["studentId"],$_SESSION["courses"] );
         break;
 
         case "updateStudent":
         $a = new schoolBLL;
-        $a->updateStudent($_SESSION["studentId"],$_SESSION["studentName"],$_SESSION["studentEmail"],$_SESSION["studentPhone"]);
+        $a->updateStudent($_SESSION["studentId"],$_SESSION["studentName"],$_SESSION["studentEmail"],$_SESSION["studentPhone"],$_SESSION["courseChecked"]);
         break;
 
         case "deleteStudent":
@@ -129,5 +134,6 @@ require_once "BLL.php";
         $a = new schoolBLL;
         $a->deleteStaff($_SESSION["studentName"],$_SESSION["studentId"]);
         break;
+
     }
 ?>
