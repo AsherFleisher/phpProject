@@ -21,6 +21,9 @@ function ajax(a) {
         var role1 = document.getElementById("role")
         var role = role1.options[role1.selectedIndex].value;
     }
+    if (document.getElementsByClassName("chooseCourseDiv") !== null) {
+
+    }
 
     var action = a.getAttribute('name')
     if (action === "logout") {

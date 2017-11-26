@@ -1,3 +1,9 @@
+body {
+    width: 80%;
+    margin-left: 10%;
+    background-color: lightblue;
+}
+
 .studentDiv,
 .courseDiv,
 .staffDiv {
@@ -10,6 +16,15 @@
 
 .course {
     flex: 1
+}
+
+.courses {
+    border-style: ridge;
+    border-width: 4px;
+    width: 100px;
+    background-color: gray;
+    text-align: center;
+    font-weight: 600
 }
 
 .student {
