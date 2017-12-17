@@ -14,7 +14,7 @@ session_start();
     <link rel="stylesheet" href="main.css">
             </head>
 
-            <body>
+            <body background="book_sky_small-1024x705.jpg">
             
                 <nav class="navbar navbar-default">
                      <div class="container-fluid">

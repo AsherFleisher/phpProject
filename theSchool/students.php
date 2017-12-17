@@ -12,7 +12,7 @@
                                         if($row['name'] ===  $students)
                                         {
                                               $_SESSION["courses"] = $row["courseId"];
-                                               echo   "Id: " . $row["id"] . "<br/>Name: " . $row['name'] . "<br/>Email: " . $row['email'] . "<br/>Phone: " . $row['phone'] . "<br/><br/><button name='editStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Edit student</button><br/><br/><button name='deleteStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Delete student</button><br/>"; 
+                                               echo   "<img src='" .$row["image"] . "' height='100px' width='100px'></img><br/>Id: " . $row["id"] . "<br/>Name: " . $row['name'] . "<br/>Email: " . $row['email'] . "<br/>Phone: " . $row['phone'] . "<br/><br/><button name='editStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Edit student</button><br/><br/><button name='deleteStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Delete student</button><br/>"; 
                                         }
                                 }  
                         }
@@ -55,13 +55,27 @@
                                                 }
                                                 else
                                                 {
-                                                        $statement = $pdo->prepare("INSERT INTO students(Id,name,phone,email)
-                                                        VALUES( :Id,:name,:phone,:email)");
+                                                      
+                                                        $target_dir = "uploads/";
+                                                        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+                                                        $uploadOk = 1;
+                                                        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION)); 
+                                                        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                                                        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
+                                                        {
+                                                                echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+                                                        } else {
+                                                                echo "Sorry, there was an error uploading your file.";
+                                                        }
+                                                        
+                                                        $statement = $pdo->prepare("INSERT INTO students(Id,name,phone,email,image)
+                                                        VALUES( :Id,:name,:phone,:email,:image)");
                                                         $statement->execute(array(
                                                         ":Id" => $studentId,
                                                         ":name" => $studentName,
                                                         ":phone" => $studentPhone,
-                                                        ":email" => $studentEmail
+                                                        ":email" => $studentEmail,
+                                                        ":image" => $target_file
                                                         ));
                                                         echo  $studentName . " has been created <br/>";
                                                 }
@@ -164,7 +178,8 @@
                                 <p>Change student Id to: <input type='number' id='studentId'></p>
                                 <p>Change student name to: <input id='studentName'></p>
                                 <p>Change student phone to: <input type='number' id='studentPhone'></p>
-                                <p>Change student email to: <input id='studentEmail'></p>";
+                                <p>Change student email to: <input id='studentEmail'></p>
+                                <p>Change student Photo<input type='file' name='fileToUpload' id='fileToUpload'></p>";
                                 $a = new course;
                                 $a->pickCourses($courses);
                                 echo "<button name='updateStudent' onclick='ajax(this)'>Change </button>";
@@ -177,6 +192,7 @@
                                 <p>Insert student name <input id='studentName'></p>
                                 <p>Insert student phone <input type='number' id='studentPhone'></p>
                                 <p>Insert student email <input type='email' id='studentEmail'></p>
+                                <p>Insert student Photo<input type='file' name='fileToUpload' id='fileToUpload'></p>
                                 <button name='create' onclick='ajax(this)'>Create new student</button>";
                         }
 

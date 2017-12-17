@@ -22,5 +22,7 @@
                  <div id="ajax2"></div>
             <script src="ajax.js"></script>
             
+            
+            
             </body>
     </html>

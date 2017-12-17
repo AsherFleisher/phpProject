@@ -1,6 +1,5 @@
 function ajax(a) {
     var ajax = "ajax"
-
     if (document.getElementById("username") !== null)
         var username = document.getElementById("username").value
     if (document.getElementById("password") !== null)
@@ -21,21 +20,25 @@ function ajax(a) {
         var role1 = document.getElementById("role")
         var role = role1.options[role1.selectedIndex].value;
     }
+     if ( document.getElementById("fileToUpload") !== null) {
+    var image = document.getElementById("fileToUpload").files[0]
+     }
     if (document.getElementsByClassName("chooseCourseDiv")[0] !== undefined) {
         var courseChecked = [];
         $('.course:checked').each(function(i){
           courseChecked[i] = $(this).val();
         });
     }
-
     var action = a.getAttribute('name')
     if (action === "logout") {
         document.location.href = "index.html";
     }
+    
     if (action === "course") {
         var courseName = a.innerHTML
-        ajax = "ajax2"
+        ajax = "ajax2";
     }
+ 
     if (action === "student" || action === "students" || action === "staff") {
         var student = a.innerHTML
         ajax = "ajax2"
@@ -65,6 +68,7 @@ function ajax(a) {
     data.append("studentId", studentId);
     data.append("role", role);
     data.append("courseChecked", courseChecked);
+    data.append("fileToUpload", image);
 
 
     var xhttp = new XMLHttpRequest();
@@ -75,5 +79,6 @@ function ajax(a) {
     };
 
     xhttp.open("POST", "API.php", true);
+  
     xhttp.send(data);
 }
