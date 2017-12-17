@@ -59,7 +59,7 @@
                                                     ":name" => $studentName,
                                                     ":phone" => $studentPhone,
                                                     ":email" => $studentEmail,
-                                                    ":password" => $password,
+                                                    ":password" => md5($password),
                                                     ":role" => $role
                                                     ));
                                                     echo  $studentName . " has been created <br/>";

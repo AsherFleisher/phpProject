@@ -12,7 +12,7 @@ class admin
     
     foreach ($statement as $row)
     {    
-            if($row['name'] === $username && $row['password'] === $password)
+            if($row['name'] === $username && $row['password'] === md5($password))
             {
                $_SESSION["role2"] =  $row['role'];
                header("Location: main.php");

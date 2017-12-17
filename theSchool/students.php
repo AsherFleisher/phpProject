@@ -178,8 +178,8 @@
                                 <p>Change student Id to: <input type='number' id='studentId'></p>
                                 <p>Change student name to: <input id='studentName'></p>
                                 <p>Change student phone to: <input type='number' id='studentPhone'></p>
-                                <p>Change student email to: <input id='studentEmail'></p>
-                                <p>Change student Photo<input type='file' name='fileToUpload' id='fileToUpload'></p>";
+                                <p>Change student email to: <input id='studentEmail'></p>";
+                        
                                 $a = new course;
                                 $a->pickCourses($courses);
                                 echo "<button name='updateStudent' onclick='ajax(this)'>Change </button>";
