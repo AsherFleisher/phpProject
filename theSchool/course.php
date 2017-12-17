@@ -31,6 +31,7 @@ class course{
                                 require "DAL.php";
                                 $courses = explode(",",$courses);
                                 $statement = $pdo->query("SELECT * FROM course");
+                                $_SESSION["courseArray"] ="";
                                 
                                 echo "<div id='coursesTaken'><br/><h5>Courses taken</h5><br/>";
                                 foreach ($statement as $row)

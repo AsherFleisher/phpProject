@@ -4,6 +4,7 @@
                         {
                                 $students = $_SESSION['students'];                
                                 require "DAL.php";
+                                require_once "course.php";
                                 $statement = $pdo->query("SELECT * FROM students");
                                 
                                 foreach ($statement as $row)
@@ -12,6 +13,7 @@
                                         if($row['name'] ===  $students)
                                         {
                                               $_SESSION["courses"] = $row["courseId"];
+                                              $b = new course; $b->showCourses($row['courseId']);
                                                echo   "<img src='" .$row["image"] . "' height='100px' width='100px'></img><br/>Id: " . $row["id"] . "<br/>Name: " . $row['name'] . "<br/>Email: " . $row['email'] . "<br/>Phone: " . $row['phone'] . "<br/><br/><button name='editStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Edit student</button><br/><br/><button name='deleteStudent' data-studentId='{$row['id']}' data-studentName='{$row['name']}' onclick='ajax(this)' > Delete student</button><br/>"; 
                                         }
                                 }  
